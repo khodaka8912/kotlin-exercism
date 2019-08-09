@@ -1,3 +1,4 @@
 include ':hello-world', ':reverse-string', ':two-fer'
 include ':pangram', ':sum-of-multiples', ':triangle'
 include ':secret-handshake', 'nth-prime', 'linked-list'
+include ':space-age', ':minesweeper', ':anagram'
