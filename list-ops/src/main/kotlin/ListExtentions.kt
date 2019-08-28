@@ -7,9 +7,7 @@ fun <E> List<E>.customAppend(list: List<E>): List<E> {
 
 fun <E> List<List<E>>.customConcat(): List<E> {
     val concatenated = mutableListOf<E>()
-    for (list in this) {
-        concatenated.addAll(list)
-    }
+    forEach { concatenated.addAll(it) }
     return concatenated
 }
 
@@ -23,8 +21,7 @@ fun <E> List<E>.customFilter(predicate: (E) -> Boolean): List<E> {
     return filtered
 }
 
-
-val <E> List<E>.customSize: Int
+val List<*>.customSize: Int
     get() {
         var count = 0
         forEach { _ -> count++ }
