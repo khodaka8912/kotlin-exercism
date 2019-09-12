@@ -24,7 +24,9 @@ fun <E> List<E>.customFilter(predicate: (E) -> Boolean): List<E> {
 val List<*>.customSize: Int
     get() {
         var count = 0
-        forEach { _ -> count++ }
+        forEach { _ ->
+            count++
+        }
         return count
     }
 
