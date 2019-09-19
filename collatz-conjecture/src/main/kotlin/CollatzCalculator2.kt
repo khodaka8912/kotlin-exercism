@@ -1,19 +1,19 @@
 import kotlin.system.measureNanoTime
 
-class CollatzCalculator {
+class CollatzCalculator2 {
     companion object {
         fun computeStepCount(num: Int): Int {
             require(num > 0) { "Only natural numbers are allowed" }
-            var count = 0
-            var x = num
-            while (x > 1) {
-                x = when {
-                    x % 2 == 0 -> x / 2
-                    else -> 3 * x + 1
-                }
-                count++
+            return countHelper(num, 0)
+        }
+
+        private tailrec fun countHelper(num: Int, count: Int): Int {
+            return when {
+                num < 1 -> throw ArithmeticException("Overflow: $num")
+                num == 1 -> count
+                num % 2 == 0 -> countHelper(num / 2, count + 1)
+                else -> countHelper(num * 3 + 1, count + 1)
             }
-            return count
         }
     }
 }
@@ -22,7 +22,7 @@ fun main() {
     val num = Integer.MAX_VALUE / 10
     val results = arrayListOf<Long>()
     repeat(100) {
-        val result = measureNanoTime { CollatzCalculator.computeStepCount(num) }
+        val result = measureNanoTime { CollatzCalculator2.computeStepCount(num) }
         println("""${"%,15d".format(result)} ns""")
         results += result
     }

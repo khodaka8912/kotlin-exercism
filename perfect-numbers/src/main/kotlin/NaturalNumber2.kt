@@ -2,13 +2,11 @@ import kotlin.math.ceil
 import kotlin.math.sqrt
 import kotlin.system.measureNanoTime
 
-enum class Classification {
-    DEFICIENT, PERFECT, ABUNDANT
-}
+private fun Int.sqrt() = ceil(sqrt(toDouble())).toInt()
 
-fun classify(naturalNumber: Int): Classification {
+fun classify2(naturalNumber: Int): Classification {
     require(naturalNumber > 0) { "$naturalNumber is not a natural number" }
-    val sum = sumOfDivisorsWithoutItself(naturalNumber)
+    val sum = naturalNumber.divisorsWithoutItself().sum()
     return when {
         sum == naturalNumber -> Classification.PERFECT
         sum > naturalNumber -> Classification.ABUNDANT
@@ -16,28 +14,23 @@ fun classify(naturalNumber: Int): Classification {
     }
 }
 
-private fun sumOfDivisorsWithoutItself(naturalNumber: Int): Int {
-    if (naturalNumber == 1) return 0
-    val sqrt = naturalNumber.sqrt()
-    var sum = 1
-    for (i in 2 until sqrt) {
-        if (naturalNumber % i == 0) {
-            sum += i + naturalNumber / i
+private fun Int.divisorsWithoutItself(): Set<Int> {
+    if (this == 1) return emptySet()
+    val result = mutableSetOf(1)
+    for (i in 2..sqrt(toDouble()).toInt()) {
+        if (this % i == 0) {
+            result.add(i)
+            result.add(this / i)
         }
     }
-    if (sqrt * sqrt == naturalNumber) {
-        sum += sqrt
-    }
-    return sum
+    return result
 }
-
-private fun Int.sqrt() = ceil(sqrt(toDouble())).toInt()
 
 fun main() {
     val num = Integer.MAX_VALUE
     val results = arrayListOf<Long>()
     repeat(100) {
-        val result = measureNanoTime { classify(num) }
+        val result = measureNanoTime { classify2(num) }
         println("""${"%,15d".format(result)} ns""")
         results += result
     }
