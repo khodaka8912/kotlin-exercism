@@ -7,11 +7,11 @@ class Reactor<T> {
         fun cancel()
     }
 
-    inner class InputCell<T>(value: T) : Cell<T>(value) {
+    inner class InputCell(value: T) : Cell<T>(value) {
         override fun computeValue() = value
     }
 
-    inner class ComputeCell<T>(private vararg val sources: Cell<T>, val function: (List<T>) -> T)
+    inner class ComputeCell(private vararg val sources: Cell<T>, val function: (List<T>) -> T)
         : Cell<T>(function(sources.map { it.computeValue() })) {
         init {
             for (cell in sources) {
