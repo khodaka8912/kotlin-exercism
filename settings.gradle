@@ -7,3 +7,4 @@ include ':perfect-numbers', ':luhn', ':largest-series-product', ':collatz-conjec
 include ':atbash-cipher', ':flatten-array'
 include ':react'
 include ':robot-name', ':robot-simulator', ':sublist'
+include ':diffie-hellman'
