@@ -2,9 +2,9 @@ class RailFenceCipher(private val rows: Int) {
 
     fun getEncryptedData(input: String): String {
         val encrypted = StringBuilder()
-        val orders = getRailFenceIndices(input.length)
-        for (order in orders) {
-            encrypted.append(input[order])
+        val indices = getRailFenceIndices(input.length)
+        for (index in indices) {
+            encrypted.append(input[index])
         }
         return encrypted.toString()
     }
