@@ -15,7 +15,7 @@ class RailFenceCipher(private val rows: Int) {
         for ((i, c) in input.withIndex()) {
             decrypted[indices[i]] = c
         }
-        return decrypted.joinToString(separator = "")
+        return String(decrypted)
     }
 
     private fun getRailFenceIndices(length: Int): List<Int> {
