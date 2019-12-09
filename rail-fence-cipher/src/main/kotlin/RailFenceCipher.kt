@@ -1,13 +1,7 @@
 class RailFenceCipher(private val rows: Int) {
 
-    fun getEncryptedData(input: String): String {
-        val encrypted = StringBuilder()
-        val indices = getRailFenceIndices(input.length)
-        for (index in indices) {
-            encrypted.append(input[index])
-        }
-        return encrypted.toString()
-    }
+    fun getEncryptedData(input: String) =
+            buildString { getRailFenceIndices(input.length).forEach { append(input[it]) } }
 
     fun getDecryptedData(input: String): String {
         val decrypted = CharArray(input.length)
