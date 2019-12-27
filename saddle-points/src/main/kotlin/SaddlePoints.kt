@@ -7,11 +7,9 @@ class Matrix(private val matrix: List<List<Int>>) {
     private fun createSaddlePoints() = mutableSetOf<MatrixCoordinate>().apply {
         for ((row, line) in matrix.withIndex()) {
             val max = line.max() ?: continue
-            for ((col, num) in line.withIndex()) {
-                if (num == max && num == getCol(col).min()) {
-                    add(MatrixCoordinate(row + 1, col + 1))
-                }
-            }
+            line.withIndex()
+                    .filter { (col, num) -> num == max && num == getCol(col).min() }
+                    .forEach { (col, _) -> add(MatrixCoordinate(row + 1, col + 1)) }
         }
     }
 
